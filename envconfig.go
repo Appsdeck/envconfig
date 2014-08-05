@@ -42,7 +42,13 @@ func Process(prefix string, spec interface{}) error {
 		if f.CanSet() {
 			fieldName := typeOfSpec.Field(i).Name
 			envFieldName := toUnderscoreCase(fieldName)
-			key := strings.ToUpper(fmt.Sprintf("%s_%s", prefix, envFieldName))
+
+			var key string
+			if len(prefix) == 0 {
+				key = strings.ToUpper(envFieldName)
+			} else {
+				key = strings.ToUpper(fmt.Sprintf("%s_%s", prefix, envFieldName))
+			}
 
 			value := os.Getenv(key)
 			if value == "" {
