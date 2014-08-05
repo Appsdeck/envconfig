@@ -16,6 +16,11 @@ type Specification struct {
 	User  string
 }
 
+type Specification2 struct {
+	DebugLevel string
+	ServerPort int
+}
+
 func TestProcess(t *testing.T) {
 	var s Specification
 	os.Clearenv()
@@ -38,6 +43,21 @@ func TestProcess(t *testing.T) {
 	}
 	if s.User != "Kelsey" {
 		t.Errorf("expected %s, got %s", "Kelsey", s.User)
+	}
+
+	var s2 Specification2
+	os.Clearenv()
+	os.Setenv("ENV_CONFIG_DEBUG_LEVEL", "info")
+	os.Setenv("ENV_CONFIG_SERVER_PORT", "3000")
+	err = Process("env_config", &s2)
+	if err != nil {
+		t.Error(err.Error())
+	}
+	if s2.DebugLevel != "info" {
+		t.Errorf("expected %s, got %s", "info", s2.DebugLevel)
+	}
+	if s2.ServerPort != 3000 {
+		t.Errorf("expected %d, got %d", 3000, s2.ServerPort)
 	}
 }
 
