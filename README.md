@@ -1,6 +1,8 @@
-# envconfig
+# [DEPRECATED] envconfig
 
 [![Build Status](https://travis-ci.org/kelseyhightower/envconfig.png)](https://travis-ci.org/kelseyhightower/envconfig)
+
+/!\ You should use upstream dependency: https://github.com/kelseyhightower/envconfig
 
 ```Go
 import "github.com/kelseyhightower/envconfig"
